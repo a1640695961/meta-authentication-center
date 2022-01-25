@@ -1,0 +1,18 @@
+
+meta:
+  security:
+    oauth2:
+      storeType: redis
+spring:
+  redis:
+    database: 14
+    port: 30037
+    host: 10.0.81.152
+    lettuce:
+      pool:
+        max-active: 8
+server:
+  port: 8090
+logging:
+  level:
+      org.springframework.security: debug

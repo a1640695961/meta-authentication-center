@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>i人事访问授权</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system-font, "Helvetica Neue", sans-serif;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      overflow: hidden;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+
+    .main-box {
+      height: 100%;
+      width: 100%;
+      font-size: 14px;
+      background: url('/ac/view/img/beijingtu_web.png') no-repeat center;
+      background-size: cover;
+    }
+
+    .main-box .header {
+      width: 100%;
+      height: 60px;
+      padding-left: 260px;
+      background: #040405;
+    }
+
+    .main-box .header .logo {
+      margin-top: 10px;
+    }
+
+    .main-box .footer {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      background: #000000;
+      font-size: 12px;
+      color: #F1F1F1;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+
+    .main-container {
+      width: 100%;
+      height: calc(100% - 120px);
+      overflow-y: auto;
+    }
+
+    .main-container .authorize {
+      width: 555px;
+      height: 465px;
+      background: #FFFFFF;
+      border-radius: 12px;
+      margin: 70px auto;
+      text-align: center;
+    }
+
+    .main-container .authorize .authorLogo {
+      width: 90px;
+      height: 90px;
+      margin: 50px auto 10px;
+    }
+
+    .main-container .authorize .title {
+      font-size: 16px;
+      color: #666666;
+    }
+
+    .main-container .authorize .authorizeUser {
+      font-size: 16px;
+      color: #999999;
+      margin: 60px auto;
+    }
+
+    .main-container .authorize .authorizeBtn {
+      width: 320px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      font-size: 14px;
+      color: #FFFFFF;
+      background: #53BEBD;
+      border-radius: 2px;
+      margin: 0 auto 20px;
+      cursor: pointer;
+    }
+
+    .main-container .authorize .li {
+      outline: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+      border: 0;
+      cursor: pointer;
+      text-decoration-line: none
+    }
+
+     .main-container .authorize a.li {
+          text-decoration-line: none;
+          color:#53BEBD;
+     }
+
+    .main-container .authorize .authorizeBtn:hover {
+      opacity: .9;
+    }
+
+    .main-container .authorize .authorizeBtn .li {
+      background: #53BEBD;
+      color: #fff;
+    }
+
+    .main-container .authorize .authorizeCancel {
+      font-size: 14px;
+      color: #53BEBD;
+      cursor: pointer;
+    }
+
+    .main-container .authorize .authorizeCancel .li {
+      background: #fff;
+    }
+
+    @media screen and (max-width: 1366px) {
+      .main-container .authorize {
+        margin: 20px auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-box">
+
+    <div class="header">
+      <img src="/ac/view/img/text_logo_web.png" alt="" class="logo">
+    </div>
+
+    <div class="main-container">
+
+      <div class="authorize">
+        <img src="/ac/view/img/logo2.png" alt="" class="authorLogo" />
+        <div class="title">i人事访问授权</div>
+
+        <div class="authorizeUser">
+          等待授权的应用：<span th:text="${clientName}"></span>
+        </div>
+
+        <form id="confirmationForm" name="confirmationForm" action="/ac/oauth/authorize" method="post">
+          <input name="user_oauth_approval" type="hidden" value="true">
+          <input th:if="${csrfTokenValue!=null}" th:name="${csrfTokenName}" type="hidden" th:value="${csrfTokenValue}">
+          <div style="display:none">
+            <div>授权范围:</div>
+            <ul>
+              <li th:each="scope: ${scopes}">
+                <span th:text="${scope.value}"></span>
+                <div class="form-group">
+                  <input type="hidden" th:name="${scope.key}" value="true" checked="">
+              </li>
+            </ul>
+            </div>
+            <div class="authorizeBtn">
+              <input name="authorize" value="同意授权" type="submit" class="li">
+            </div>
+            <div class="authorizeCancel">
+              <a  class="li" th:href="${redirectUrl}">取消授权</a>
+            </div>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="footer">
+        Copyright © 2008-2018 上海利唐信息科技有限公司 沪ICP备16020917号-3
+    </div>
+
+  </div>
+</body>
+
+</html>

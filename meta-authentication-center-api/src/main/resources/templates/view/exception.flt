@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>Message: ${message}</p>
+<p>URL: ${url}</p>
+</body>
+</html>
