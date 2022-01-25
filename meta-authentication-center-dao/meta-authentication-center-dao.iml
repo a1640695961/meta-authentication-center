@@ -69,7 +69,7 @@
     <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.72.Final" level="project" />
     <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.4.13" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
-    <orderEntry type="library" name="Maven: com.meta:meta-authentication-center-domain:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="meta-authentication-center-domain" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.5.4" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-boot-starter:3.0.0" level="project" />

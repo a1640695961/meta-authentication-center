@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>com.meta</groupId>
-            <artifactId>authentication-center-service</artifactId>
+            <artifactId>meta-authentication-center-service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
