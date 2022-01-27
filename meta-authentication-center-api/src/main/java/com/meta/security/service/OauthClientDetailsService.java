@@ -26,7 +26,14 @@ public class OauthClientDetailsService implements ClientDetailsService {
                 .secret("{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG")
                 .scopes("client")
                 .redirectUris("http://localhost:8080/login/oauth2/code/meta")
-                .autoApprove(true);
+                .autoApprove(true)
+                .and()
+                .withClient("meta_gateway")
+                .authorizedGrantTypes("authorization_code","refresh_token")
+                .authorities("ROLE_USER","ROLE_ADMIN")
+                .secret("{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG")
+                .scopes("client")
+                .redirectUris("http://localhost:8080/login/oauth2/code/meta-center");
         try {
             ClientDetailsService clientDetailsService = inMemoryClientDetailsServiceBuilder.build();
             return clientDetailsService.loadClientByClientId(clientId);

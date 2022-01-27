@@ -16,7 +16,7 @@ import java.io.IOException;
  **/
 @Component
 @Slf4j
-public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
+public class MetaLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 

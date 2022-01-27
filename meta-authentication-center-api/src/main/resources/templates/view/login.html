@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Error page</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="col-sm-12">
+        <form name="f" action="login" method="POST">
+            <fieldset>
+                <legend>PC Login</legend>
+
+                <label for="accountName">Username</label>
+                <input type="text" id="accountName" name="accountName"/>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password"/>
+
+<!--                <input class="form-control third-input" type="text" id="loginVerifyCode" name="loginVerifyCode"  placeholder="验证码"/>-->
+<!--                <img id="verifyCodeImg" class="cursor-pointer verifyCode" src="/ac/noauth/verifyCode/generate?type=LOGIN"/>-->
+                <div class="form-actions">
+                    <button type="button" class="btn" id="loginSubmitBtn">Log in</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <a id="confirm_jump" href="#">Confirm jump</a>
+</div>
+</body>
+<script type="text/javascript" src="//cdn.ihr360.com/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ajaxStart(function() {
+        $("title").html("LOADING ...");
+    });
+
+    $("#loginSubmitBtn").click(function(){
+        var accountName=$("#accountName").val();
+        var password=$("#password").val();
+        var data={};
+        data.accountName = accountName;
+        data.password = password;
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            async:false,
+            contentType:"application/json",
+            url: "/meta/login",
+            data: JSON.stringify(data),
+            success: function(result){
+                //TODO 添加针对结果的处理，根据userRole决定跳转页面。
+                console.log(result);
+
+                console.log(result.success);
+                console.log(result.redirectUrl);
+                // if(result.success){
+                //     var redirectUrl= result.redirectUrl;
+                //     if(redirectUrl!=null){
+                //         console.log('redirect to:',redirectUrl);
+                //
+                //         if(result.needUserConfirm){
+                //             $("#confirm_jump").attr("href",redirectUrl)
+                //         }else{
+                //             location.href=redirectUrl;
+                //         }
+                //
+                //     }
+                // }
+            }
+        });
+    });
+</script>
+</html>

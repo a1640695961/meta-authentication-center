@@ -17,6 +17,14 @@
             <artifactId>meta-authentication-center-dao</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.meta</groupId>
+            <artifactId>meta-commons-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.meta</groupId>
+            <artifactId>meta-commons-core-model</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

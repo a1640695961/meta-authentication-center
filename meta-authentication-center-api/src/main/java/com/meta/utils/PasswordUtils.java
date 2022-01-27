@@ -1,5 +1,6 @@
 package com.meta.utils;
 
+import com.meta.commons.lang.RandomUtil;
 import org.springframework.util.StringUtils;
 
 import java.nio.charset.Charset;

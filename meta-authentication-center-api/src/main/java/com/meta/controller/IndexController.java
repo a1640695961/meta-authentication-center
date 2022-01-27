@@ -23,4 +23,9 @@ public class IndexController {
     public String root() {
         return "index";
     }
+
+    @GetMapping("/view/login")
+    public String login(){
+        return "view/login";
+    }
 }
