@@ -4,6 +4,7 @@ import com.meta.security.filter.MetaUsernamePasswordAuthenticationFilter;
 import com.meta.security.handler.MetaLoginUrlAuthenticationEntryPoint;
 import com.meta.security.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -59,13 +60,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        //认证中心登陆
+        //认证中心退出
+        //包含用户信息保存
+        //sessionId  cookie
 
+        http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         http.authorizeRequests()
                 .antMatchers("/view/**").permitAll();
 
+        //自己系统的登陆
         http
-                .formLogin().permitAll()
+                .exceptionHandling()
+//                .authenticationEntryPoint(metaLoginUrlAuthenticationEntryPoint())
+                .and()
+                .formLogin()
+//                .loginProcessingUrl("https://account.ihr360.com/ac/view/login/#/login")
+                .permitAll()
                 .and()
                 .headers()
 //                .exceptionHandling()
@@ -80,7 +91,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() //其余所有请求全部需要鉴权认证
                 .and()
                 .csrf().disable();
-
 
 //        http.requestCache().requestCache(new CustomHttpSessionRequestCache());
 

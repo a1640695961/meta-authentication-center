@@ -1,6 +1,6 @@
-package com.meta.service.impl;
+package com.meta.service.oauth2.impl;
 
-import com.meta.service.ClientService;
+import com.meta.service.oauth2.ClientService;
 import org.springframework.stereotype.Service;
 
 /**

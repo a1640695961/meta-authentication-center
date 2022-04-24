@@ -59,6 +59,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .tokenKeyAccess("isAuthenticated()")
                 // 开启/oauth/check_token验证端口认证权限访问
                 .checkTokenAccess("permitAll()");
+
+        //oauth/authorize
+        //oauth/token
     }
 
     @Override

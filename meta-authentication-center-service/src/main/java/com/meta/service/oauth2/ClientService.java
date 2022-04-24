@@ -1,4 +1,4 @@
-package com.meta.service;
+package com.meta.service.oauth2;
 
 /**
  * @author Xiong Mao

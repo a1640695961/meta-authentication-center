@@ -24,8 +24,10 @@ public class MetaAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         log.error("【CustomAuthenticationFailureHandler】 onAuthenticationFailure exception={}", exception);
 
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        response.getWriter().println(ResultVo.fail("用户名或密码错误"));
-        response.getWriter().flush();
+        if (!response.isCommitted()) {
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.getWriter().println(ResultVo.fail("用户名或密码错误"));
+            response.getWriter().flush();
+        }
     }
 }

@@ -1,18 +1,49 @@
-
+server:
+  port: 8090
+  servlet:
+    context-path: /ac
 meta:
   security:
     oauth2:
       storeType: redis
 spring:
+  application:
+    name: meta-authentication-center-api
+  datasource:
+    url: jdbc:mysql://110.40.254.165:3306/n1yo?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    username: root
+    password: sTBI#2lz
+    driver-class-name: com.mysql.jdbc.Driver
   redis:
     database: 14
-    port: 30037
-    host: 10.0.81.152
+    port: 6379
+    host: 110.40.254.165
+    password: 8*Zwua^a
     lettuce:
       pool:
         max-active: 8
-server:
-  port: 8090
+
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: fastjson
+  remote:
+    default:
+      type: redis
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: 110.40.254.165
+      port: 6379
+      password: 8*Zwua^a
+      database: 1
 logging:
   level:
       org.springframework.security: debug

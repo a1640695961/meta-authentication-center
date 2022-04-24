@@ -1,6 +1,6 @@
 package com.meta.security.service;
 
-import com.meta.service.ClientService;
+import com.meta.service.oauth2.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.provider.ClientDetails;
