@@ -6,7 +6,6 @@
         <groupId>com.meta</groupId>
         <artifactId>meta-authentication-center</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.meta</groupId>
     <artifactId>meta-authentication-center-api</artifactId>

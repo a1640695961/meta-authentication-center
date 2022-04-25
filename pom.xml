@@ -16,6 +16,16 @@
         <module>meta-authentication-center-domain</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>mate_group</id>
+            <url>http://8.142.222.226:8081/repository/mate_group/</url>
+        </repository>
+        <snapshotRepository>
+            <id>mate_group</id>
+            <url>http://8.142.222.226:8081/repository/mate_hosted/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <dependencyManagement>
         <dependencies>
             <dependency>
