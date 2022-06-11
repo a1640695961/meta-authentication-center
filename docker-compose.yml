@@ -1,0 +1,11 @@
+version: '3'
+services:
+  meta-authority-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8090"
+    image: registry.cn-shanghai.aliyuncs.com/meta360/meta-authority-api:latest
+    restart: always
+    container_name: meta-authority-api
