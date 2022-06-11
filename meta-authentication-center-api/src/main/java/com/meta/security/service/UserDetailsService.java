@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  * @date 2022/01/18 18:01
  **/
 @Service
+@Transactional
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
 
