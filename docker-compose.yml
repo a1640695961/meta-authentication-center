@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8090"
+      - 8000:8090
     image: registry.cn-shanghai.aliyuncs.com/meta360/meta-authority-api:latest
     restart: always
     container_name: meta-authority-api
