@@ -16,7 +16,7 @@ docker image prune -a -f
 docker build -t registry.cn-shanghai.aliyuncs.com/meta360/meta-authority-api:latest .
 
 echo 'Docker push...'
-docker push registry.cn-shanghai.aliyuncs.com/meta360/meta-authority-api:latest
+#docker push registry.cn-shanghai.aliyuncs.com/meta360/meta-authority-api:latest
 
 echo 'Docker run...'
 docker-compose up -d
