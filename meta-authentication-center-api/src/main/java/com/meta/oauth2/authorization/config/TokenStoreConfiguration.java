@@ -1,13 +1,17 @@
 package com.meta.oauth2.authorization.config;
 
+import com.meta.oauth2.authorization.jwt.MetaJwtTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
@@ -22,7 +26,7 @@ public class TokenStoreConfiguration {
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-//    @Autowired
+    @Autowired(required = false)
     private DataSource dataSource;
 
     @Bean
@@ -40,19 +44,39 @@ public class TokenStoreConfiguration {
 
     @Configuration
     @ConditionalOnProperty(prefix = "meta.security.oauth2", name = "storeType", havingValue = "jwt", matchIfMissing = true)
-    public static class JwtTokenConfig{
+    public static class JwtTokenConfig {
 
+        /**
+         * 使用jwtTokenStore存储token
+         *
+         * @return
+         */
+        @Bean
+        public TokenStore jwtTokenStore() {
+            return new JwtTokenStore(jwtAccessTokenConverter());
+        }
 
-        public JwtAccessTokenConverter accessTokenConverter() {
-            JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-//            converter.setKeyPair(this.keyPair);
-            converter.setSigningKey("");
+        /**
+         * 用于生成jwt
+         *
+         * @return
+         */
+        @Bean
+        public JwtAccessTokenConverter jwtAccessTokenConverter() {
+            JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+            accessTokenConverter.setSigningKey("meta");//生成签名的key
+            return accessTokenConverter;
+        }
 
-//            DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
-//            accessTokenConverter.setUserTokenConverter(new SubjectAttributeUserTokenConverter());
-//            converter.setAccessTokenConverter(accessTokenConverter);
-
-            return converter;
+        /**
+         * 用于扩展JWT
+         *
+         * @return
+         */
+        @Bean
+        @ConditionalOnMissingBean(name = "jwtTokenEnhancer")
+        public TokenEnhancer jwtTokenEnhancer() {
+            return new MetaJwtTokenEnhancer();
         }
     }
 }

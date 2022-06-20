@@ -3,13 +3,12 @@ package com.meta.controller;
 import com.meta.domain.entity.AccountDetails;
 import com.meta.model.UserVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
@@ -23,12 +22,11 @@ public class UserController {
 
     @GetMapping("me")
     @ResponseBody
-    public UserVo me(OAuth2Authentication oAuth2Authentication, AccountDetails details) {
+    public UserVo me(OAuth2Authentication oAuth2Authentication) {
         if (oAuth2Authentication == null) {
             log.error("Can not get principal info");
             return null;
         }
-        log.info(details.toString());
         log.info(oAuth2Authentication.toString());
         Object principal = oAuth2Authentication.getPrincipal();
         String loginAgent = null;
@@ -40,8 +38,7 @@ public class UserController {
         }
 
         UserVo userVo = new UserVo();
-        userVo.setUsername(details.getAccountName());
-        userVo.setAuthorities((Set<SimpleGrantedAuthority>) details.getAuthorities());
+        userVo.setUsername(oAuth2Authentication.getPrincipal().toString());
         return userVo;
     }
 }

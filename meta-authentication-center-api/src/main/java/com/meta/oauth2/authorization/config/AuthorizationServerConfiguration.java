@@ -26,6 +26,8 @@ import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import java.util.ArrayList;
@@ -51,6 +53,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private TokenStore tokenStore;
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;
+    @Autowired
+    private List<TokenEnhancer> tokenEnhancers;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -96,6 +100,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setTokenStore(tokenStore);
+
+        //token增强
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
+        tokenServices.setTokenEnhancer(tokenEnhancerChain);
+
         //refresh token 不重新使用
         tokenServices.setReuseRefreshToken(false);
         tokenServices.setClientDetailsService(oauthClientDetailsService);

@@ -20,13 +20,13 @@ public class AccountDetails implements UserDetails {
 
     private String mobileNo;
 
-    private boolean accountNonExpired;
+    private Boolean accountNonExpired;
 
-    private boolean accountNonLocked;
+    private Boolean accountNonLocked;
 
-    private boolean credentialsNonExpired;
+    private Boolean credentialsNonExpired;
 
-    private boolean enabled;
+    private Boolean enabled;
 
     private Set<GrantedAuthority> authorities;
 

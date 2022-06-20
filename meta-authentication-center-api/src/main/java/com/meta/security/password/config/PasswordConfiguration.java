@@ -33,4 +33,21 @@ public class PasswordConfiguration {
         return passwordEncoder;
 
     }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+        encoders.put("bcrypt", bCryptPasswordEncoder);
+        encoders.put("meta", new MetaPasswordEncoder());
+
+        DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder(
+                "bcrypt", encoders);
+        passwordEncoder.setDefaultPasswordEncoderForMatches(bCryptPasswordEncoder);
+
+
+        boolean password = passwordEncoder.matches("1", "{bcrypt}$2a$10$tTR.qnOGeD4JS7or8IixVepdp9cOwzh4vPREwqjVCxDlPsHuhK2DS");
+
+        System.out.println(password);
+    }
 }

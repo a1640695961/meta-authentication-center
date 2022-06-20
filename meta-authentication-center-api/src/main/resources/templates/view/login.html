@@ -42,12 +42,13 @@
         var data={};
         data.accountName = accountName;
         data.password = password;
+        data.loginType= "PASSWORD";
         console.log(data);
         $.ajax({
             type: "POST",
             async:false,
             contentType:"application/json",
-            url: "/meta/login",
+            url: "/ac/login",
             data: JSON.stringify(data),
             success: function(result){
                 //TODO 添加针对结果的处理，根据userRole决定跳转页面。

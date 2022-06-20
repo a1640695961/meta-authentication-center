@@ -8,4 +8,10 @@ import com.meta.domain.po.AccountPo;
  **/
 public interface AccountService {
     AccountPo getAccount(String accountName);
+
+    void accountLock(String accountName);
+
+    void updateAccountLastLoginTime(String id);
+
+    AccountPo loadUserByUsername(String accountName);
 }

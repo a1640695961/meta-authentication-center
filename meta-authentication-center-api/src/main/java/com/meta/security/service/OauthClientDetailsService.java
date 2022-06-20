@@ -1,8 +1,7 @@
 package com.meta.security.service;
 
-import com.meta.service.oauth2.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
@@ -15,31 +14,10 @@ import org.springframework.stereotype.Component;
 @Component("oauthClientDetailsService")
 public class OauthClientDetailsService implements ClientDetailsService {
     @Autowired
-    private ClientService clientService;
+    @Qualifier("jdbcClientDetailsService")
+    private ClientDetailsService clientDetailsService;
 
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        InMemoryClientDetailsServiceBuilder inMemoryClientDetailsServiceBuilder = new InMemoryClientDetailsServiceBuilder();
-        inMemoryClientDetailsServiceBuilder
-                .withClient("meta")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-                .authorities("ROLE_ADMIN", "ROLE_USER")
-                .secret("{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG")
-                .scopes("client")
-                .redirectUris("http://localhost:8080/login/oauth2/code/meta")
-                .autoApprove(true)
-                .and()
-                .withClient("meta_gateway")
-                .authorizedGrantTypes("authorization_code","refresh_token")
-                .authorities("ROLE_USER","ROLE_ADMIN")
-                .secret("{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG")
-                .scopes("client")
-                .redirectUris("http://localhost:8080/login/oauth2/code/meta-center");
-        try {
-            ClientDetailsService clientDetailsService = inMemoryClientDetailsServiceBuilder.build();
-            return clientDetailsService.loadClientByClientId(clientId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return  null;
+        return  clientDetailsService.loadClientByClientId(clientId);
     }
 }
