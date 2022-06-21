@@ -28,6 +28,10 @@ spring:
     lettuce:
       pool:
         max-active: 8
+  session:
+    store-type: redis
+
+
 
 jetcache:
   statIntervalMinutes: 15

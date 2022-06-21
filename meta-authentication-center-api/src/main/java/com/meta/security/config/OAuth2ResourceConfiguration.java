@@ -67,8 +67,9 @@ public class OAuth2ResourceConfiguration extends ResourceServerConfigurerAdapter
                 .authenticationEntryPoint(new MetaLoginUrlAuthenticationEntryPoint("/login"))
 //                .defaultAuthenticationEntryPointFor()
 //                .authenticationEntryPoint(metaLoginUrlAuthenticationEntryPoint())
-                .and()
-                .formLogin()
+//                .and()
+//                .formLogin()
+//                .successHandler()
 //                .loginProcessingUrl("https://account.ihr360.com/ac/view/login/#/login")
 //                .permitAll()
                 .and()
@@ -88,6 +89,8 @@ public class OAuth2ResourceConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/meta/login").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/view/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/index.html").permitAll()
                 .anyRequest().authenticated() //其余所有请求全部需要鉴权认证
                 .and()
                 .csrf().disable();
