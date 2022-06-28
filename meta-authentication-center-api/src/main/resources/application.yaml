@@ -2,6 +2,8 @@ server:
   port: 8090
   servlet:
     context-path: /ac
+    session:
+      timeout: 86400
 meta:
   security:
     oauth2:
@@ -30,6 +32,8 @@ spring:
         max-active: 8
   session:
     store-type: redis
+    redis:
+      namespace: authcenter:spring:session
 
 
 

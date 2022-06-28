@@ -22,8 +22,8 @@ public class LoginResponseVo implements Serializable {
 //    @ApiModelProperty(value = "用户角色", notes = "返回用户在当前公司的登录角色")
 //    private String userRole;
 //
-//    @ApiModelProperty(value = "跳转路径", notes = "登录成功后的跳转路径")
-//    private String redirectUrl;
+    @ApiModelProperty(value = "跳转路径", notes = "登录成功后的跳转路径")
+    private String redirectUrl;
 
     @ApiModelProperty(value = "是否需要图像验证", notes = "错误3次以后需要输入验证码")
     private boolean needVerifyCode;
@@ -53,6 +53,14 @@ public class LoginResponseVo implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 
     public boolean isNeedVerifyCode() {

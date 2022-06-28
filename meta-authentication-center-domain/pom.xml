@@ -31,6 +31,10 @@
             <groupId>com.meta</groupId>
             <artifactId>meta-commons-core-model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>

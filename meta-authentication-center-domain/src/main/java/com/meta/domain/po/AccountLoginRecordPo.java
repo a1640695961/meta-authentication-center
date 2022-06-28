@@ -1,5 +1,6 @@
 package com.meta.domain.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.meta.commons.model.eneity.StringIdWithTime;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
  * @author Xiong Mao
  * @date 2022/06/10 16:34
  **/
+@TableName("ac_account_login_record")
 public class AccountLoginRecordPo extends StringIdWithTime {
 
     /**
