@@ -196,7 +196,7 @@ public class MetaUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
             securityAuthenticationResponseVO.setNeedVerifyCode(true);
         }
         try {
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             response.getWriter().println(JSON.toJSONString(securityAuthenticationResponseVO));
             response.getWriter().flush();
         } catch (IOException e) {

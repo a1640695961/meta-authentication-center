@@ -61,10 +61,13 @@ public class OAuth2ResourceConfiguration extends ResourceServerConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers("/view/**").permitAll();
 
+        http.requestCache()
+                .requestCache(new CustomHttpSessionRequestCache());
+
         //自己系统的登陆
         http
                 .exceptionHandling()
-                .authenticationEntryPoint(new MetaLoginUrlAuthenticationEntryPoint("/login"))
+                .authenticationEntryPoint(new MetaLoginUrlAuthenticationEntryPoint("/view/login"))
 //                .defaultAuthenticationEntryPointFor()
 //                .authenticationEntryPoint(metaLoginUrlAuthenticationEntryPoint())
 //                .and()

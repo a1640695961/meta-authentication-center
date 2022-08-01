@@ -56,19 +56,21 @@
 
                 console.log(result.success);
                 console.log(result.redirectUrl);
-                // if(result.success){
-                //     var redirectUrl= result.redirectUrl;
-                //     if(redirectUrl!=null){
-                //         console.log('redirect to:',redirectUrl);
-                //
-                //         if(result.needUserConfirm){
-                //             $("#confirm_jump").attr("href",redirectUrl)
-                //         }else{
-                //             location.href=redirectUrl;
-                //         }
-                //
-                //     }
-                // }
+                if(result.success){
+                    var redirectUrl= result.redirectUrl;
+                    if(redirectUrl!=null){
+                        console.log('redirect to:',redirectUrl);
+
+                        if(result.needUserConfirm){
+                            $("#confirm_jump").attr("href",redirectUrl)
+                        }else if(result.redirectUrl != null){
+                            location.href=redirectUrl;
+                        } else {
+                            document.write(result)
+                        }
+
+                    }
+                }
             }
         });
     });

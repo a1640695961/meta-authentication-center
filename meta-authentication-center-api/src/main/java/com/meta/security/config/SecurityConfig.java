@@ -30,13 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .exceptionHandling()
-                .authenticationEntryPoint(new MetaLoginUrlAuthenticationEntryPoint("/view/login"))
-                .and()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(new MetaLoginUrlAuthenticationEntryPoint("/view/login"))
+//                .and()
                 .logout()
                 .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
-                .requestCache();
+                .requestCache()
+                .requestCache(new CustomHttpSessionRequestCache());
 
 
 //        http

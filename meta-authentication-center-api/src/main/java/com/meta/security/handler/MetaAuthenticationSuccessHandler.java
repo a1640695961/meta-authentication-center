@@ -3,6 +3,7 @@ package com.meta.security.handler;
 import cn.hutool.json.JSONUtil;
 import com.meta.domain.entity.AccountDetails;
 import com.meta.domain.vo.LoginResponseVo;
+import com.meta.security.config.CustomHttpSessionRequestCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ import java.io.IOException;
 @Slf4j
 public class MetaAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    private RequestCache requestCache = new HttpSessionRequestCache();
+    private RequestCache requestCache = new CustomHttpSessionRequestCache();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
